@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cash Receiving - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="cash.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="cash">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <header class="page-head"><h1 class="page-title">Cash Receiving</h1><p class="page-sub">Collections, receipts and day close</p></header>
+        <section class="cash-stats" id="cashCards" aria-label="Today's collections"></section>
+
+        <section class="card role-manager" id="approvals" aria-labelledby="appr-title">
+          <h2 class="card__title" id="appr-title">Discount approvals <span class="badge" id="apprCount">0</span></h2>
+          <div id="apprList" class="appr"></div>
+        </section>
+
+        <div class="cash-layout">
+          <section class="card" aria-labelledby="rc-title">
+            <div class="card__head"><h2 class="card__title" id="rc-title">Receipts</h2>
+              <div class="cash-filters">
+                <input class="input" id="rcQ" type="search" placeholder="Search guest, room or receipt" aria-label="Search receipts">
+                <select class="select" id="rcMethod" aria-label="Method"><option value="">All methods</option><option>Cash</option><option>Card</option><option>Mobile Banking</option></select>
+                <select class="select" id="rcStatus" aria-label="Status"><option value="">All statuses</option><option>Received</option><option>Pending</option><option>Refunded</option></select>
+                <select class="select" id="rcDate" aria-label="Date"><option value="today">Today</option><option value="all">All dates</option></select>
+              </div>
+            </div>
+            <div class="table-wrap table-wrap--scroll">
+              <table class="table">
+                <thead><tr><th>Receipt</th><th>Guest</th><th>Room</th><th class="right">Amount</th><th>Method</th><th>Received by</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="rcBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="cash-side">
+            <section class="card role-edit" aria-labelledby="nr-title">
+              <h2 class="card__title" id="nr-title">New receipt</h2>
+              <form id="rcForm" novalidate>
+                <label class="field__label" for="rcLookup">Guest or room</label>
+                <input class="input" id="rcLookup" list="rcGuests" placeholder="Room number or guest name" autocomplete="off">
+                <datalist id="rcGuests"></datalist>
+                <p class="cash-hint" id="rcHint"></p>
+                <label class="field__label" for="rcAmt">Amount (BDT)</label>
+                <input class="input" id="rcAmt" type="number" min="1">
+                <label class="field__label" for="rcMeth">Method</label>
+                <select class="select" id="rcMeth"><option>Cash</option><option>Card</option><option>Mobile Banking</option></select>
+                <label class="field__label" for="rcNote">Note</label>
+                <input class="input" id="rcNote" type="text" placeholder="Optional, for example bKash reference">
+                <p class="field-error" id="rcErr" role="alert" hidden></p>
+                <button class="btn btn--primary cash-submit" type="submit">Record Receipt</button>
+              </form>
+            </section>
+
+            <section class="card" aria-labelledby="dc-title">
+              <h2 class="card__title" id="dc-title">Day close</h2>
+              <dl class="dc" id="dcLines"></dl>
+              <div class="role-edit">
+                <label class="field__label" for="dcCount">Counted cash (BDT)</label>
+                <input class="input" id="dcCount" type="number" min="0">
+                <p class="cash-hint" id="dcDiff"></p>
+                <button class="btn btn--primary cash-submit" type="button" id="dcClose">Close Day</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/cash.js"></script>
+</body>
+</html>

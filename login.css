@@ -1,0 +1,37 @@
+/* login.css - Claude B, round 2. Loads after base.css. */
+.login { min-height: 100vh; }
+.login__theme { position: fixed; top: 16px; right: 16px; z-index: 5; }
+.login__wrap { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+.login__side { display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: 48px; background: var(--surface-2); border-right: 1px solid var(--border); }
+.login__brand { display: flex; align-items: center; gap: 12px; }
+.login__logo { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: 1.25rem; }
+.login__hotel { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; }
+.login__eyebrow { margin: 0 0 12px; color: var(--accent); font-size: .8125rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.login__lead { margin: 0; max-width: 18ch; font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.15; }
+.login__sidefoot { margin: 0; color: var(--text-muted); font-size: .875rem; }
+
+.login__card { align-self: center; justify-self: center; width: calc(100% - 48px); max-width: 420px; padding: 36px; display: grid; gap: 12px; box-shadow: var(--shadow-sm); }
+.login__title { margin: 0; font-size: 1.75rem; }
+.login__hint { margin: 0 0 12px; color: var(--text-muted); }
+.login__form { display: grid; gap: 16px; }
+.field { display: grid; gap: 4px; }
+.login__submit { width: 100%; min-height: 48px; margin-top: 8px; }
+.login__foot { margin: 8px 0 0; text-align: center; font-size: .875rem; color: var(--text-muted); }
+.input, .select { transition: border-color .15s, box-shadow .15s; }
+.input:focus, .select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--surface-2), 0 0 0 4px var(--accent); }
+
+.login__demo { margin-top: 12px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); font-size: .875rem; }
+.login__demo summary { min-height: 28px; display: flex; align-items: center; cursor: pointer; font-weight: 600; }
+.login__demohint { margin: 8px 0 12px; color: var(--text-muted); }
+.login__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.login__chip { min-height: 44px; padding: 4px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: .8125rem; font-weight: 600; cursor: pointer; transition: border-color .15s, color .15s; }
+.login__chip:hover { border-color: var(--accent); color: var(--accent); }
+
+@media (max-width: 860px) {
+  .login__wrap { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .login__side { flex-direction: row; align-items: center; gap: 16px; padding: 20px 24px; border-right: 0; border-bottom: 1px solid var(--border); }
+  .login__pitch, .login__sidefoot { display: none; }
+  .login__card { align-self: start; margin: 32px 0; }
+}
+@media (max-width: 480px) { .login__card { width: calc(100% - 32px); padding: 24px 20px; } .login__side { padding: 16px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

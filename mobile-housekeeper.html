@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>My Tasks - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="mobile-housekeeper.css">
+  <script src="js/theme.js"></script>
+</head>
+<body class="mobile" data-page="mobile-housekeeper">
+  <header class="mhead">
+    <div class="mhead__id">
+      <h1 class="mhead__name">Rina Begum</h1>
+      <p class="mhead__shift">Housekeeper &middot; Morning shift, 7:00 AM to 3:00 PM</p>
+    </div>
+    <!-- JS: theme toggle switches data-theme on html -->
+    <button class="btn mhead__theme" type="button">Theme</button>
+  </header>
+
+  <main class="mmain">
+    <h2 class="mmain__title">Assigned rooms <span class="badge">4</span></h2>
+
+    <!-- JS: Start Cleaning sets status to cleaning in progress; Mark Ready sets room ready; Report Issue opens maintenance form -->
+    <ul class="tasks">
+      <li class="task task--dirty">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 204</strong><span class="badge badge--dirty">Dirty</span></header>
+          <p class="task__type">Checkout cleaning &middot; Floor 2</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">Start Cleaning</button>
+            <button class="btn btn--big" type="button">Mark Ready</button>
+            <button class="btn btn--danger btn--big" type="button">Report Issue</button>
+          </div>
+        </article>
+      </li>
+      <li class="task task--progress">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 317</strong><span class="badge badge--occupied">Cleaning</span></header>
+          <p class="task__type">Checkout cleaning &middot; Floor 3</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">Start Cleaning</button>
+            <button class="btn btn--big" type="button">Mark Ready</button>
+            <button class="btn btn--danger btn--big" type="button">Report Issue</button>
+          </div>
+        </article>
+      </li>
+      <li class="task task--dirty">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 512</strong><span class="badge badge--dirty">Dirty</span></header>
+          <p class="task__type">Stay-over service &middot; Floor 5</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">Start Cleaning</button>
+            <button class="btn btn--big" type="button">Mark Ready</button>
+            <button class="btn btn--danger btn--big" type="button">Report Issue</button>
+          </div>
+        </article>
+      </li>
+      <li class="task task--dirty">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 906</strong><span class="badge badge--dirty">Dirty</span></header>
+          <p class="task__type">Deep clean &middot; Floor 9</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">Start Cleaning</button>
+            <button class="btn btn--big" type="button">Mark Ready</button>
+            <button class="btn btn--danger btn--big" type="button">Report Issue</button>
+          </div>
+        </article>
+      </li>
+    </ul>
+  </main>
+
+  <!-- JS: switch between Tasks, Done and Profile views -->
+  <nav class="bottombar" aria-label="Main">
+    <a class="bottombar__link bottombar__link--active" href="#" aria-current="page">Tasks</a>
+    <a class="bottombar__link" href="#">Done</a>
+    <a class="bottombar__link" href="#">Profile</a>
+  </nav>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/mobile-housekeeper.js"></script>
+</body>
+</html>

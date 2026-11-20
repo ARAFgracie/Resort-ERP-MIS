@@ -1,0 +1,166 @@
+/* rooms.css - Rooms page. Owner: Claude C. Loads after base.css; colors come from base.css variables only. */
+
+.page-head { display: grid; gap: 4px; }
+.page-lede { margin: 0; max-width: 60ch; color: var(--text-muted); }
+
+/* ---------- Status language, shared by tiles and legend swatches ---------- */
+.tile--vacant, .legend__swatch--vacant { --st: var(--success); }
+.tile--occupied, .legend__swatch--occupied { --st: var(--occupied); }
+.tile--dirty, .legend__swatch--dirty { --st: var(--warning); }
+.tile--maintenance, .legend__swatch--maintenance { --st: var(--danger); }
+.tile--reserved, .legend__swatch--reserved { --st: var(--info); }
+
+/* ---------- Overview: floors + legend ---------- */
+.overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 24px 40px; align-items: start; }
+.overview__col { display: grid; gap: 12px; align-content: start; }
+.overview__label { margin: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+
+.floor-nav { display: flex; flex-wrap: wrap; gap: 8px; }
+.floor-nav__link {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 44px; min-height: 44px; padding: 0 12px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  font-weight: 600; font-variant-numeric: tabular-nums;
+  transition: background-color 150ms, border-color 150ms, color 150ms;
+}
+.floor-nav__link:hover { background: var(--surface-2); border-color: var(--text-muted); color: var(--text); }
+.floor-nav__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 28px; }
+.legend__item { display: flex; align-items: center; gap: 10px; color: var(--text-muted); }
+.legend__item strong { color: var(--text); font-size: 1.125rem; font-variant-numeric: tabular-nums; }
+
+/* swatch = a miniature tile, so the legend teaches the real look */
+.legend__swatch, .tile {
+  position: relative;
+  background: var(--surface-2);
+  background: color-mix(in srgb, var(--st) 15%, var(--surface));
+  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--st) 45%, var(--surface));
+  box-shadow: inset 0 -3px 0 var(--st);
+}
+.legend__swatch { width: 24px; height: 24px; border-radius: 7px; display: inline-block; flex: none; }
+
+/* shape marker: status is never carried by color alone */
+.legend__swatch::after, .tile::after {
+  content: ""; position: absolute; width: 8px; height: 8px; background: var(--st);
+}
+.legend__swatch::after { top: 4px; right: 4px; width: 7px; height: 7px; }
+.tile::after { top: 7px; right: 7px; }
+.tile--vacant::after, .legend__swatch--vacant::after { border-radius: 50%; background: transparent; border: 2px solid var(--st); }
+.tile--occupied::after, .legend__swatch--occupied::after { border-radius: 50%; }
+.tile--dirty::after, .legend__swatch--dirty::after { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.tile--maintenance::after, .legend__swatch--maintenance::after {
+  clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%);
+}
+.tile--reserved::after, .legend__swatch--reserved::after { transform: rotate(45deg) scale(0.85); }
+
+/* ---------- Layout ---------- */
+.rooms-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start; }
+.rooms-board {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 16px; min-width: 0;
+}
+.room-find { display: grid; gap: 4px; max-width: 360px; }
+.floors { display: grid; gap: 16px; }
+
+/* ---------- Filter chips: CSS-only radios (JS only fills in the counts) ---------- */
+.filter__radio { position: absolute; opacity: 0; pointer-events: none; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px;
+  border-radius: 999px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-muted); font-weight: 600; cursor: pointer;
+  transition: background-color 150ms, border-color 150ms, color 150ms;
+}
+.chip:hover { background: var(--surface-2); color: var(--text); }
+.chip__n { margin-left: 6px; font-weight: 500; font-variant-numeric: tabular-nums; opacity: 0.8; }
+#flt-all:focus-visible ~ .chips label[for="flt-all"],
+#flt-vacant:focus-visible ~ .chips label[for="flt-vacant"],
+#flt-occupied:focus-visible ~ .chips label[for="flt-occupied"],
+#flt-dirty:focus-visible ~ .chips label[for="flt-dirty"],
+#flt-maintenance:focus-visible ~ .chips label[for="flt-maintenance"],
+#flt-reserved:focus-visible ~ .chips label[for="flt-reserved"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+#flt-all:checked ~ .chips label[for="flt-all"],
+#flt-vacant:checked ~ .chips label[for="flt-vacant"],
+#flt-occupied:checked ~ .chips label[for="flt-occupied"],
+#flt-dirty:checked ~ .chips label[for="flt-dirty"],
+#flt-maintenance:checked ~ .chips label[for="flt-maintenance"],
+#flt-reserved:checked ~ .chips label[for="flt-reserved"] {
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+}
+#flt-vacant:checked ~ .floors .tile:not(.tile--vacant),
+#flt-occupied:checked ~ .floors .tile:not(.tile--occupied),
+#flt-dirty:checked ~ .floors .tile:not(.tile--dirty),
+#flt-maintenance:checked ~ .floors .tile:not(.tile--maintenance),
+#flt-reserved:checked ~ .floors .tile:not(.tile--reserved) { display: none; }
+
+/* ---------- Floors: calm collapsible panels ---------- */
+.floor {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+  scroll-margin-top: calc(var(--topbar-h) + 16px);
+}
+.floor__summary {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px;
+  min-height: 56px; padding: 14px 52px 14px 20px; position: relative;
+  cursor: pointer; list-style: none; border-radius: var(--radius-lg);
+}
+.floor__summary::-webkit-details-marker { display: none; }
+.floor__summary::after {
+  content: ""; position: absolute; right: 22px; top: 50%; width: 8px; height: 8px;
+  border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted);
+  transform: translateY(-70%) rotate(45deg); transition: transform 150ms;
+}
+.floor[open] > .floor__summary::after { transform: translateY(-30%) rotate(-135deg); }
+.floor__summary:hover { background: var(--surface-2); }
+.floor__name { font-size: 1.0625rem; font-weight: 600; }
+.floor__meta { color: var(--text-muted); font-size: 0.8125rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+.floor[open] > .floor__summary { border-bottom: 1px solid var(--border); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.floor__grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px; padding: 20px;
+}
+
+/* ---------- Room tiles ---------- */
+.tile {
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px;
+  min-height: 60px; padding: 8px 10px; border-radius: 10px; cursor: pointer;
+  color: var(--text); font: inherit; text-align: left;
+  transition: border-color 150ms, transform 150ms;
+}
+.tile__num { font-weight: 700; font-size: 1rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.tile__type { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.04em; color: var(--text); }
+.tile:hover { border-color: var(--st); transform: translateY(-1px); }
+.tile--sel { outline: 2px solid var(--text); outline-offset: 2px; }
+.tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Side panel ---------- */
+.room-panel { position: sticky; top: calc(var(--topbar-h) + 24px); display: grid; gap: 16px; padding: 24px; }
+.room-panel .card__title { margin: 0; font-size: 1.375rem; font-weight: 600; }
+.room-panel .badge { justify-self: start; margin-top: -8px; }
+.room-panel__placeholder { margin: 0; color: var(--text-muted); }
+.room-panel__list { margin: 0; display: grid; grid-template-columns: 1fr; }
+.room-panel__list dt { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.room-panel__list dt:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.room-panel__list dd { margin: 2px 0 0; font-weight: 500; font-variant-numeric: tabular-nums; }
+.room-panel__list dd a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.room-panel__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.room-panel__actions > :first-child, .room-panel__actions > :last-child { grid-column: 1 / -1; }
+
+@media (max-width: 1100px) {
+  .overview { grid-template-columns: 1fr; }
+  .rooms-layout { grid-template-columns: 1fr; }
+  .room-panel { order: -1; position: static; scroll-margin-top: calc(var(--topbar-h) + 16px); }
+}
+@media (max-width: 700px) {
+  .floor__grid { grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)); gap: 8px; padding: 16px; }
+  .floor__summary { padding-left: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile, .chip, .floor-nav__link, .floor__summary::after { transition: none; }
+  .tile:hover { transform: none; }
+}
+
+/* shell fix at phone width: keep the topbar inside the viewport (also requested for base.css) */
+@media (max-width: 480px) { .topbar { gap: 8px; padding: 0 12px; } .topbar .btn { padding-inline: 10px; } }

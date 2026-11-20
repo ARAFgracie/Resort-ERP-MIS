@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guest Services - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="guest-services.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="guest-services">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link sidebar__link--active" href="guest-services.html" aria-current="page">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <div class="page-head">
+          <h1 class="page-title">Guest Services</h1>
+          <p class="page-sub">In-house room requests and guest support tickets, in one calm view.</p>
+        </div>
+        <div class="toolbar card toolbar--bar">
+          <p class="toolbar__hint">Manage in-house room requests and guest support tickets.</p>
+          <div class="toolbar__filters" role="group" aria-label="Filter requests"><select class="select" id="gsStatus" aria-label="Filter by status"><option value="">All statuses</option><option>Pending</option><option>In progress</option><option>Done</option></select><select class="select" id="gsPri" aria-label="Filter by priority"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+          <a class="btn btn--primary" href="#new-request">New Request</a>
+        </div>
+
+        <div class="tabs">
+          <input class="tabs__radio" type="radio" name="gs-tab" id="tab-requests" checked>
+          <input class="tabs__radio" type="radio" name="gs-tab" id="tab-support">
+          <div class="tabs__bar" role="tablist">
+            <label class="tabs__label" for="tab-requests" id="tabReq">Room Requests</label>
+            <label class="tabs__label" for="tab-support" id="tabSup">Guest Support</label>
+          </div>
+
+          <section class="tabs__panel tabs__panel--requests card" aria-label="Room Requests">
+            <!-- JS: filter requests by status and priority -->
+            <div class="table-wrap">
+              <table class="table">
+                <thead><tr><th>Room</th><th>Request</th><th>Time</th><th>Priority</th><th>Assigned staff</th><th>Status</th></tr></thead>
+                <tbody id="reqBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="tabs__panel tabs__panel--support" aria-label="Guest Support">
+            <div class="support">
+              <div class="card">
+                <h2 class="card__title">Tickets</h2>
+                <ul class="ticket-list" id="ticketList"></ul>
+              </div>
+              <!-- JS: show selected ticket in the detail view -->
+              <div class="card" id="ticket-detail"></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- CSS :target modal -->
+        <div class="modal" id="new-request" role="dialog" aria-modal="true" aria-labelledby="nr-title">
+          <a class="modal__backdrop" href="#" aria-label="Close"></a>
+          <form class="modal__box card" id="nrForm" action="#" method="post" novalidate>
+            <h2 class="card__title" id="nr-title">New Request</h2>
+            <label class="field__label" for="nr-room">Room</label>
+            <input class="input" id="nr-room" type="text" placeholder="e.g. 204">
+            <label class="field__label" for="nr-type">Request type</label>
+            <select class="select" id="nr-type"><option>Towels</option><option>Extra bedding</option><option>Maintenance fix</option><option>Amenity refill</option></select>
+            <label class="field__label" for="nr-pri">Priority</label>
+            <select class="select" id="nr-pri"><option>Low</option><option>Medium</option><option>High</option></select>
+            <label class="field__label" for="nr-note">Note</label>
+            <textarea class="textarea" id="nr-note" rows="3"></textarea>
+            <p class="field-error" id="nrErr" role="alert" hidden></p>
+            <div class="modal__actions">
+              <a class="btn" href="#">Cancel</a>
+              <!-- JS: validate and submit new request -->
+              <button class="btn btn--primary" type="submit">Create Request</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/guest-services.js"></script>
+</body>
+</html>

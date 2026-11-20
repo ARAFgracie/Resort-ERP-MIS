@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Service Requests - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="mobile-service.css">
+  <script src="js/theme.js"></script>
+</head>
+<body class="mobile" data-page="mobile-service">
+  <header class="mhead">
+    <div class="mhead__id">
+      <h1 class="mhead__name">Karim Hossain</h1>
+      <p class="mhead__shift">Service Staff &middot; Day shift, 8:00 AM to 4:00 PM</p>
+    </div>
+    <!-- JS: theme toggle switches data-theme on html -->
+    <button class="btn mhead__theme" type="button">Theme</button>
+  </header>
+
+  <main class="mmain">
+    <h2 class="mmain__title">Incoming requests <span class="badge">4</span></h2>
+
+    <!-- JS: On My Way marks request as en route; Done closes it and removes the card -->
+    <ul class="tasks">
+      <li class="task task--high">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 518</strong><span class="badge badge--maintenance">High</span></header>
+          <p class="task__type">Air conditioner not cooling</p>
+          <p class="task__time">Requested 10:05 AM</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">On My Way</button>
+            <button class="btn btn--big" type="button">Done</button>
+          </div>
+        </article>
+      </li>
+      <li class="task task--high">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 826</strong><span class="badge badge--maintenance">High</span></header>
+          <p class="task__type">Leaking bathroom tap</p>
+          <p class="task__time">Requested 10:48 AM</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">On My Way</button>
+            <button class="btn btn--big" type="button">Done</button>
+          </div>
+        </article>
+      </li>
+      <li class="task task--medium">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 312</strong><span class="badge badge--dirty">Medium</span></header>
+          <p class="task__type">Extra bedding</p>
+          <p class="task__time">Requested 9:40 AM</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">On My Way</button>
+            <button class="btn btn--big" type="button">Done</button>
+          </div>
+        </article>
+      </li>
+      <li class="task task--low">
+        <article>
+          <header class="task__head"><strong class="task__room">Room 204</strong><span class="badge badge--vacant">Low</span></header>
+          <p class="task__type">Extra towels</p>
+          <p class="task__time">Requested 9:12 AM</p>
+          <div class="task__actions">
+            <button class="btn btn--primary btn--big" type="button">On My Way</button>
+            <button class="btn btn--big" type="button">Done</button>
+          </div>
+        </article>
+      </li>
+    </ul>
+  </main>
+
+  <!-- JS: switch between Requests, Done and Profile views -->
+  <nav class="bottombar" aria-label="Main">
+    <a class="bottombar__link bottombar__link--active" href="#" aria-current="page">Requests</a>
+    <a class="bottombar__link" href="#">Done</a>
+    <a class="bottombar__link" href="#">Profile</a>
+  </nav>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/mobile-service.js"></script>
+</body>
+</html>

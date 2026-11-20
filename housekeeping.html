@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Housekeeping - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="housekeeping.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="housekeeping">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link sidebar__link--active" href="housekeeping.html" aria-current="page">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <div class="page-head">
+          <h1 class="page-title">Housekeeping</h1>
+          <p class="page-sub">Room readiness at a glance, from dirty to ready.</p>
+        </div>
+        <!-- Front Desk sees this page read-only; only Send Cleaning Request is available to them. -->
+        <section class="card assign role-manager" aria-label="Assign task">
+          <h2 class="card__title">Assign task</h2>
+          <div class="assign__row">
+            <div class="assign__field"><label class="field__label" for="as-room">Room</label><input class="input" id="as-room" type="text" placeholder="e.g. 317"></div>
+            <div class="assign__field"><label class="field__label" for="as-hk">Housekeeper</label><select class="select" id="as-hk"><option>Rina Begum</option><option>Jamal Sheikh</option><option>Shirin Akhter</option><option>Mizanur Rahman</option></select></div>
+            <div class="assign__field"><label class="field__label" for="as-pri">Priority</label><select class="select" id="as-pri"><option>Normal</option><option>High</option><option>Urgent</option></select></div>
+            <!-- JS: assign task to housekeeper and move card on board -->
+            <button class="btn btn--primary assign__btn" type="button">Assign Task</button>
+          </div>
+        </section>
+
+        <!-- JS: drag or move room cards between columns -->
+        <div class="board" id="board"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/housekeeping.js"></script>
+</body>
+</html>

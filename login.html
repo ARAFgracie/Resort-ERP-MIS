@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="login.css">
+  <script src="js/theme.js"></script>
+</head>
+<body class="login" data-page="login">
+  <!-- JS: theme toggle switches data-theme on html -->
+  <button class="btn login__theme" type="button" aria-label="Toggle light or dark theme">Theme</button>
+
+  <main class="login__wrap">
+    <aside class="login__side">
+      <div class="login__brand">
+        <span class="login__logo" aria-hidden="true">H</span>
+        <p class="login__hotel">[Hotel Name]</p>
+      </div>
+      <div class="login__pitch">
+        <p class="login__eyebrow">Hotel operations</p>
+        <p class="login__lead">Front desk, rooms, housekeeping and cash in one calm place.</p>
+      </div>
+      <p class="login__sidefoot">12 floors, 417 rooms. Preview build.</p>
+    </aside>
+    <section class="card login__card" aria-labelledby="login-title">
+      <h1 class="login__title" id="login-title">Sign in</h1>
+      <p class="login__hint">Use your staff account to continue.</p>
+
+      <!-- JS: validate fields, check credentials, redirect by role -->
+      <form class="login__form" id="loginForm" action="#" method="post" novalidate>
+        <div class="field">
+          <label class="field__label" for="username">Username</label>
+          <input class="input" id="username" name="username" type="text" autocomplete="username" placeholder="e.g. rahim.uddin" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="password">Password</label>
+          <input class="input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="role">Role</label>
+          <!-- JS: selected role decides sidebar items after login -->
+          <select class="select" id="role" name="role">
+            <option value="admin">Admin</option>
+            <option value="owner">Owner</option>
+            <option value="manager">Manager</option>
+            <option value="frontdesk" selected>Front Desk</option>
+            <option value="housekeeper">Housekeeper</option>
+            <option value="service">Service Staff</option>
+          </select>
+        </div>
+        <p class="field-error" id="loginError" role="alert" hidden></p>
+        <button class="btn btn--primary login__submit" type="submit">Sign In</button>
+      </form>
+      <details class="login__demo" open>
+        <summary>Demo accounts (preview build only)</summary>
+        <p class="login__demohint">Password for all accounts: <strong>demo123</strong>. Tap one to fill the form.</p>
+        <div class="login__chips" id="demoChips"></div>
+      </details>
+      <p class="login__foot">Forgot your password? Contact your Admin.</p>
+    </section>
+  </main>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/login.js"></script>
+</body>
+</html>

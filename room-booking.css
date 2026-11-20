@@ -1,0 +1,110 @@
+/* room-booking.css - Room Booking page. Owner: Claude C. Loads after base.css; colors come from base.css variables only. */
+
+.page-head { display: grid; gap: 4px; }
+.page-lede { margin: 0; max-width: 60ch; color: var(--text-muted); }
+
+.rb-layout { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 24px; align-items: start; }
+.rb-steps { display: grid; gap: 24px; min-width: 0; }
+
+/* ---------- Step cards ---------- */
+.step { padding: 24px; }
+.step__head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.step__num {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center; font-weight: 700; font-size: 0.875rem;
+  border: 1px solid var(--accent); color: var(--accent); background: var(--surface);
+  font-variant-numeric: tabular-nums;
+}
+.step__title { margin: 0; font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
+.step__hint { margin: 2px 0 0; font-size: 0.875rem; color: var(--text-muted); }
+
+/* ---------- Fields ---------- */
+.rb-field { display: grid; gap: 6px; margin-bottom: 16px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-muted); }
+.rb-field .input, .rb-field .select { min-height: 48px; color: var(--text); font-weight: 400; letter-spacing: 0; transition: border-color 150ms; }
+.rb-field .input:hover, .rb-field .select:hover { border-color: var(--text-muted); }
+.rb-fields { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.rb-fields .rb-field { margin-bottom: 0; }
+.rb-guest { display: grid; gap: 0; max-width: 560px; }
+.rb-roompick { margin: 20px 0 0; max-width: 360px; }
+.rb-idrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; }
+.field-error { margin: 12px 0 0; }
+
+/* ---------- Room type cards ---------- */
+.rb-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.rtype { display: block; cursor: pointer; position: relative; }
+.rtype__input, .pay__input { position: absolute; opacity: 0; pointer-events: none; }
+.rtype__card {
+  position: relative; display: grid; gap: 4px; align-content: start; min-height: 128px;
+  padding: 20px 52px 20px 20px; border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: var(--surface); transition: border-color 150ms, background-color 150ms, box-shadow 150ms;
+}
+.rtype:hover .rtype__card { border-color: var(--text-muted); }
+.rtype__name { font-size: 1.125rem; font-weight: 600; }
+.rtype__price { font-size: 0.9375rem; color: var(--text); font-variant-numeric: tabular-nums; }
+.rtype__avail { margin-top: 8px; color: var(--success); font-size: 0.8125rem; font-weight: 600; }
+.rtype__avail--none { color: var(--danger); }
+/* selection marker: a ring that fills, so selection is not color alone */
+.rtype__card::after {
+  content: ""; position: absolute; top: 20px; right: 20px; width: 20px; height: 20px;
+  border-radius: 50%; border: 2px solid var(--border); background: var(--surface);
+  transition: border-color 150ms, box-shadow 150ms, background-color 150ms;
+}
+.rtype__input:checked + .rtype__card { border-color: var(--accent); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--accent); }
+.rtype__input:checked + .rtype__card::after { border-color: var(--accent); background: var(--accent); box-shadow: inset 0 0 0 4px var(--surface-2); }
+.rtype__input:checked + .rtype__card .rtype__name { color: var(--accent); }
+.rtype__input:focus-visible + .rtype__card, .pay__input:focus-visible + .pay__btn { outline: 2px solid var(--accent); outline-offset: 2px; }
+.rtype__input:disabled + .rtype__card { opacity: 0.6; cursor: not-allowed; border-style: dashed; background: var(--surface-2); }
+.rtype__input:disabled + .rtype__card::after { border-color: var(--border); background: transparent; }
+.rtype:hover .rtype__input:disabled + .rtype__card { border-color: var(--border); }
+
+/* ---------- Summary ---------- */
+.rb-summary { position: sticky; top: calc(var(--topbar-h) + 24px); padding: 24px; }
+.rb-summary__title { margin: 0 0 16px; font-size: 1.125rem; font-weight: 600; }
+.rb-lines { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; margin: 0 0 20px; padding: 16px 0; border-block: 1px solid var(--border); }
+.rb-lines dt { color: var(--text-muted); font-size: 0.9375rem; }
+.rb-lines dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.rb-note { margin: -8px 0 16px; padding-left: 12px; border-left: 2px solid var(--warning); font-size: 0.8125rem; color: var(--text-muted); }
+.rb-note:empty { display: none; }
+.rb-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.rb-total span { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.rb-total strong {
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(1.625rem, 2.4vw, 2.125rem);
+  letter-spacing: -0.01em; line-height: 1.1; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+
+.rb-pay { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border: 0; padding: 0; margin: 0 0 16px; min-width: 0; }
+.rb-pay legend { padding: 0; margin-bottom: 8px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-muted); }
+.pay { display: block; cursor: pointer; }
+.pay__btn {
+  display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 4px 8px;
+  text-align: center; font-size: 0.9375rem; font-weight: 600; line-height: 1.25;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
+  transition: border-color 150ms, background-color 150ms, color 150ms;
+}
+.pay:hover .pay__btn { border-color: var(--text-muted); }
+.pay__input:checked + .pay__btn { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+
+.rb-check { display: flex; align-items: center; gap: 12px; min-height: 44px; margin-bottom: 16px; font-weight: 600; cursor: pointer; }
+.rb-check input { width: 20px; height: 20px; accent-color: var(--accent); }
+.rb-confirm { width: 100%; min-height: 56px; font-size: 1.0625rem; }
+.rb-confirm:disabled { opacity: 0.55; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .rb-layout { grid-template-columns: 1fr; }
+  .rb-summary { position: static; }
+}
+@media (max-width: 700px) {
+  .rb-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step, .rb-summary { padding: 20px; }
+  .rb-idrow { grid-template-columns: 1fr; gap: 0; }
+}
+@media (max-width: 400px) {
+  .pay__btn { font-size: 0.875rem; padding: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rtype__card, .rtype__card::after, .pay__btn, .rb-field .input, .rb-field .select { transition: none; }
+}
+
+/* shell fix at phone width: keep the topbar inside the viewport (also requested for base.css) */
+@media (max-width: 480px) { .topbar { gap: 8px; padding: 0 12px; } .topbar .btn { padding-inline: 10px; } }

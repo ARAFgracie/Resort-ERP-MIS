@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Front Desk - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="front-desk.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="front-desk">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link sidebar__link--active" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <div class="page-head">
+          <h1 class="page-title">Front Desk</h1>
+          <p class="page-lede">Today's arrivals, guests in house, and the details you need at the counter.</p>
+        </div>
+        <div class="card fd-search">
+          <label class="fd-search__label" for="fd-q">Quick search</label>
+          <!-- JS: filter arrivals and in-house lists as the user types -->
+          <input class="input" id="fd-q" type="search" placeholder="Guest name, room number or phone">
+        </div>
+
+        <div class="fd-layout">
+          <section class="card fd-col" aria-labelledby="arr-title">
+            <h2 class="card__title" id="arr-title">Expected Arrivals Today <span class="badge" id="arrCount">0</span></h2>
+            <ul class="guest-list" id="arrList">
+              <li class="guest-list__item"><div><strong>Rahim Uddin</strong><p class="guest-list__meta">Room 412, Deluxe, 2 nights, ETA 11:30</p></div><!-- JS: check in guest --><button class="btn btn--primary" type="button">Check In</button></li>
+              <li class="guest-list__item"><div><strong>Farhan Ahmed</strong><p class="guest-list__meta">Room 309, Standard, 3 nights, ETA 14:00</p></div><button class="btn btn--primary" type="button">Check In</button></li>
+              <li class="guest-list__item"><div><strong>Emily Clarke</strong><p class="guest-list__meta">Room 701, Suite, 4 nights, ETA 15:30</p></div><button class="btn btn--primary" type="button">Check In</button></li>
+              <li class="guest-list__item"><div><strong>Tasnim Akter</strong><p class="guest-list__meta">Room 218, Family, 2 nights, ETA 16:00</p></div><button class="btn btn--primary" type="button">Check In</button></li>
+              <li class="guest-list__item"><div><strong>David Miller</strong><p class="guest-list__meta">Room 1015, Deluxe, 1 night, ETA 18:45</p></div><button class="btn btn--primary" type="button">Check In</button></li>
+            </ul>
+          </section>
+
+          <section class="card fd-col" aria-labelledby="inh-title">
+            <h2 class="card__title" id="inh-title">In-house Guests <span class="badge" id="inhCount">0</span></h2>
+            <ul class="guest-list" id="inhList">
+              <li class="guest-list__item"><div><strong>Sarah Johnson</strong><p class="guest-list__meta">Room 806, out 18 Nov, due BDT 0</p></div><!-- JS: check out guest and mark room dirty --><button class="btn" type="button">Check Out</button></li>
+              <li class="guest-list__item"><div><strong>Hiroshi Tanaka</strong><p class="guest-list__meta">Room 1004, out today, due BDT 4,200</p></div><button class="btn" type="button">Check Out</button></li>
+              <li class="guest-list__item"><div><strong>Maria Gonzalez</strong><p class="guest-list__meta">Room 1112, out today, due BDT 0</p></div><button class="btn" type="button">Check Out</button></li>
+              <li class="guest-list__item"><div><strong>Kamal Hossain</strong><p class="guest-list__meta">Room 523, out 17 Nov, due BDT 9,500</p></div><button class="btn" type="button">Check Out</button></li>
+              <li class="guest-list__item"><div><strong>Priya Sharma</strong><p class="guest-list__meta">Room 330, out 20 Nov, due BDT 0</p></div><button class="btn" type="button">Check Out</button></li>
+            </ul>
+          </section>
+
+          <!-- JS: fill this panel when a guest is selected -->
+          <aside class="card detail" id="detail" aria-labelledby="det-title">
+            <h2 class="card__title" id="det-title">Guest Details</h2>
+            <dl class="detail__list">
+              <dt>Name</dt><dd>Hiroshi Tanaka</dd>
+              <dt>Phone</dt><dd>+81 90 1234 5678</dd>
+              <dt>ID</dt><dd>Passport, TK1234567</dd>
+              <dt>Room</dt><dd>1004, Deluxe</dd>
+              <dt>Stay</dt><dd>13 Nov to 16 Nov (3 nights)</dd>
+              <dt>Balance due</dt><dd class="detail__due">BDT 4,200</dd>
+              <dt>Notes</dt><dd>Late check-out requested until 14:00. Prefers high floor.</dd>
+            </dl>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/front-desk.js"></script>
+</body>
+</html>

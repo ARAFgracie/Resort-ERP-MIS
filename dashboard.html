@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="dashboard">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link sidebar__link--active" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <header class="page-head"><h1 class="page-title">Dashboard</h1><p class="page-sub">Today at a glance</p></header>
+        <section class="stats" id="stats" aria-label="Key figures">
+          <article class="card stat"><p class="stat__label">Occupancy</p><p class="stat__value">64%</p><p class="stat__note">268 of 417 rooms</p></article>
+          <article class="card stat"><p class="stat__label">Rooms Vacant</p><p class="stat__value stat__value--vacant">92</p><p class="stat__note">Ready to sell: 71</p></article>
+          <article class="card stat"><p class="stat__label">Today's Check-ins</p><p class="stat__value">34</p><p class="stat__note">12 arrived</p></article>
+          <article class="card stat"><p class="stat__label">Today's Check-outs</p><p class="stat__value">29</p><p class="stat__note">18 departed</p></article>
+          <article class="card stat"><p class="stat__label">Today's Revenue</p><p class="stat__value">BDT 4,82,500</p><p class="stat__note">Room charges</p></article>
+          <article class="card stat"><p class="stat__label">Pending Cash</p><p class="stat__value stat__value--warn">BDT 68,200</p><p class="stat__note">9 open balances</p></article>
+        </section>
+
+        <section class="card" aria-labelledby="status-title">
+          <h2 class="card__title" id="status-title">Room Status Summary</h2>
+          <div class="statusbar" id="statusbar" role="img" aria-label="Vacant 92, Occupied 268, Reserved 24, Dirty 21, Maintenance 12">
+            <span class="statusbar__seg statusbar__seg--vacant"></span>
+            <span class="statusbar__seg statusbar__seg--occupied"></span>
+            <span class="statusbar__seg statusbar__seg--reserved"></span>
+            <span class="statusbar__seg statusbar__seg--dirty"></span>
+            <span class="statusbar__seg statusbar__seg--maintenance"></span>
+          </div>
+          <ul class="legend" id="legend">
+            <li><span class="badge badge--vacant">Vacant</span> 92</li>
+            <li><span class="badge badge--occupied">Occupied</span> 268</li>
+            <li><span class="badge badge--reserved">Reserved</span> 24</li>
+            <li><span class="badge badge--dirty">Dirty</span> 21</li>
+            <li><span class="badge badge--maintenance">Maintenance</span> 12</li>
+          </ul>
+        </section>
+
+        <div class="split">
+          <section class="card" aria-labelledby="ad-title">
+            <div class="card__head"><h2 class="card__title" id="ad-title">Arrivals and Departures</h2>
+            <div class="seg" id="adFilter" role="group" aria-label="Show"><button type="button" class="seg__btn is-on" data-f="all" aria-pressed="true">All</button><button type="button" class="seg__btn" data-f="arr" aria-pressed="false">Arrivals</button><button type="button" class="seg__btn" data-f="dep" aria-pressed="false">Departures</button></div></div>
+            <div class="table-wrap table-wrap--scroll">
+              <table class="table">
+                <thead><tr><th>Guest</th><th>Room</th><th>Type</th><th>Time</th><th>Status</th></tr></thead>
+                <tbody id="adBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="floor-title">
+            <h2 class="card__title" id="floor-title">Floor Occupancy</h2>
+            <ul class="floors" id="floorList">
+              <li class="floors__row"><span class="floors__name">Ground</span><progress class="floors__bar" value="14" max="21"></progress><span class="floors__count">14/21</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 1</span><progress class="floors__bar" value="26" max="36"></progress><span class="floors__count">26/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 2</span><progress class="floors__bar" value="28" max="36"></progress><span class="floors__count">28/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 3</span><progress class="floors__bar" value="25" max="36"></progress><span class="floors__count">25/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 4</span><progress class="floors__bar" value="27" max="36"></progress><span class="floors__count">27/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 5</span><progress class="floors__bar" value="24" max="36"></progress><span class="floors__count">24/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 6</span><progress class="floors__bar" value="23" max="36"></progress><span class="floors__count">23/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 7</span><progress class="floors__bar" value="25" max="36"></progress><span class="floors__count">25/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 8</span><progress class="floors__bar" value="22" max="36"></progress><span class="floors__count">22/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 9</span><progress class="floors__bar" value="20" max="36"></progress><span class="floors__count">20/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 10</span><progress class="floors__bar" value="18" max="36"></progress><span class="floors__count">18/36</span></li>
+              <li class="floors__row"><span class="floors__name">Floor 11</span><progress class="floors__bar" value="16" max="36"></progress><span class="floors__count">16/36</span></li>
+            </ul>
+          </section>
+        </div>
+
+        <section class="card" aria-labelledby="feed-title">
+          <h2 class="card__title" id="feed-title">Recent Activity</h2>
+          <!-- JS: append new activity items live -->
+          <ul class="feed" id="feed">
+            <li class="feed__item"><span class="feed__time">12:42</span> Room 806 checked in, Sarah Johnson</li>
+            <li class="feed__item"><span class="feed__time">12:30</span> Room 1004 marked dirty after check-out</li>
+            <li class="feed__item"><span class="feed__time">12:05</span> Cash receipt BDT 18,000 received for Room 412</li>
+            <li class="feed__item"><span class="feed__time">11:48</span> Maintenance reported in Room 523 (air conditioner)</li>
+            <li class="feed__item"><span class="feed__time">11:20</span> Walk-in booking confirmed, Room 309, 3 nights</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+</body>
+</html>

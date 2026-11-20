@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="search.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="search">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link sidebar__link--active" href="search.html" aria-current="page">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <div class="page-head">
+          <h1 class="page-title">Search</h1>
+          <p class="page-lede">Find a guest, booking, room or receipt from one place.</p>
+        </div>
+
+        <section class="card search__box" aria-label="Global search">
+          <label class="search__label" for="q">Search the whole system</label>
+          <!-- JS: live search across guests, bookings, rooms, staff, receipts -->
+          <input class="input search__input" id="q" type="search" placeholder="Guest name, phone, booking ID, room number, receipt no.">
+          <!-- JS: filter results by chip -->
+          <div class="chips" role="group" aria-label="Filter by type">
+            <button class="chip chip--active" type="button" aria-pressed="true">All</button>
+            <button class="chip" type="button" aria-pressed="false">Guests</button>
+            <button class="chip" type="button" aria-pressed="false">Bookings</button>
+            <button class="chip" type="button" aria-pressed="false">Rooms</button>
+            <button class="chip role-staffonly" type="button" aria-pressed="false">Staff</button>
+            <button class="chip" type="button" aria-pressed="false">Receipts</button>
+          </div>
+        </section>
+
+        <div class="search__layout">
+          <div class="search__main">
+          <section class="card" aria-labelledby="res-title">
+            <h2 class="card__title" id="res-title"><span id="resLabel">Results</span> <span class="search__count" id="resCount"></span></h2>
+            <!-- JS: render results from SQL query; role-based hiding of Staff and Receipts types -->
+            <ul class="results" id="results"></ul>
+          </section>
+
+            <!-- Empty state: JS shows this block when there are no matches -->
+            <section class="card empty" id="emptyState" aria-labelledby="empty-title" hidden>
+              <div class="empty__icon" aria-hidden="true">?</div>
+              <h2 class="empty__title" id="empty-title">No results found</h2>
+              <p class="empty__text" id="emptyText">Check the spelling or try a phone number, room number or booking ID.</p>
+            </section>
+          </div>
+
+          <aside class="search__side">
+            <section class="card" aria-labelledby="recent-title">
+              <h2 class="card__title" id="recent-title">Recent searches</h2>
+              <!-- JS: store and render recent searches; clear button -->
+              <ul class="recent" id="recent"></ul>
+              <button class="btn search__clear" type="button">Clear recent</button>
+            </section>
+
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/search.js"></script>
+</body>
+</html>

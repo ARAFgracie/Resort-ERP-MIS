@@ -1,0 +1,71 @@
+/* dashboard.css - Claude B, round 2. Loads after base.css. */
+.page-head { display: grid; gap: 4px; }
+.page-title { font-size: 2rem; }
+.page-sub { margin: 0; color: var(--text-muted); }
+
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.stat { padding: 16px; display: grid; gap: 4px; align-content: start; }
+.stat:first-child { border-top: 3px solid var(--accent); }
+.stat__label { margin: 0; color: var(--text-muted); font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.stats .stat__value { margin: 4px 0 0; font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap; }
+.stat__value--vacant { color: var(--success); }
+.stat__value--warn { color: var(--warning); }
+.stat__note { margin: 0; color: var(--text-muted); font-size: .8125rem; }
+@media (min-width: 600px) {
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stat { padding: 20px; }
+  .stats .stat__value { font-size: 1.375rem; }
+}
+@media (min-width: 901px) and (max-width: 1100px) { .stats .stat__value { font-size: 1.125rem; } }
+@media (min-width: 1700px) { .stats { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+.statusbar { display: flex; gap: 2px; height: 12px; border-radius: 6px; overflow: hidden; background: var(--surface-2); }
+.statusbar__seg--vacant { background: var(--success); }
+.statusbar__seg--occupied { background: var(--occupied); }
+.statusbar__seg--reserved { background: var(--info); }
+.statusbar__seg--dirty { background: var(--warning); }
+.statusbar__seg--maintenance { background: var(--danger); }
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 16px 0 0; padding: 0; font-variant-numeric: tabular-nums; }
+.legend li { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+
+.split { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; align-items: start; }
+.card__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.card__head .card__title { margin: 0; }
+.card__title { font-size: 1.0625rem; }
+.table th { font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
+.table td { font-variant-numeric: tabular-nums; }
+.table tbody tr { transition: background .15s; }
+.table tbody tr:hover { background: var(--surface-2); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table-wrap--scroll { max-height: 440px; }
+
+.floors { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.floors__row { display: grid; grid-template-columns: 64px 1fr 56px; align-items: center; gap: 12px; min-height: 32px; font-size: .875rem; }
+.floors__name { color: var(--text-muted); }
+.floors__bar { width: 100%; height: 8px; border: 0; border-radius: 4px; background: var(--surface-2); overflow: hidden; -webkit-appearance: none; appearance: none; }
+.floors__bar::-webkit-progress-bar { background: var(--surface-2); border-radius: 4px; }
+.floors__bar::-webkit-progress-value { background: var(--occupied); border-radius: 4px; }
+.floors__bar::-moz-progress-bar { background: var(--occupied); border-radius: 4px; }
+.floors__bar--hot::-webkit-progress-value { background: var(--warning); }
+.floors__bar--hot::-moz-progress-bar { background: var(--warning); }
+.floors__count { color: var(--text-muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+.feed { list-style: none; margin: 0; padding: 0; display: grid; }
+.feed__item { display: grid; grid-template-columns: 56px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.feed__item:last-child { border-bottom: 0; padding-bottom: 0; }
+.feed__item:first-child { padding-top: 0; }
+.feed__time { color: var(--text-muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 1100px) { .split { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .page-title { font-size: 1.625rem; } .card { padding: 16px; } .feed__item { grid-template-columns: 48px 1fr; } }
+
+/* Small-screen shell fix (also listed as a base.css request): keep the page from scrolling sideways and the topbar on one line. */
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .sidebar, .main { min-width: 0; }
+  .topbar { gap: 8px; padding: 0 12px; }
+  .topbar .btn { padding: 6px 10px; white-space: nowrap; }
+  .topbar .theme-label, .topbar .menu__btn > span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+.main { grid-template-columns: minmax(0, 1fr); }

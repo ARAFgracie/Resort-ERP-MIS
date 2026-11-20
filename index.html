@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[Hotel Name] - Stay with us</title>
+  <meta name="description" content="Rooms, suites and family stays. Check availability and request a booking.">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="js/theme.js"></script>
+</head>
+<body class="site">
+  <header class="site-nav">
+    <a class="site-nav__brand" href="#top"><span class="site-nav__logo" aria-hidden="true">H</span>[Hotel Name]</a>
+    <nav class="site-nav__links" aria-label="Main">
+      <a href="#rooms">Rooms</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#location">Location</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="site-nav__actions">
+      <button class="btn" type="button" id="themeBtn" aria-label="Toggle light or dark theme">Theme</button>
+      <a class="btn btn--primary" href="login.html">Staff Login</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__text">
+        <p class="hero__eyebrow">12 floors, 417 rooms</p>
+        <h1 class="hero__title">A calm stay in the heart of the city</h1>
+        <p class="hero__lead">Standard rooms, deluxe rooms, family rooms and suites. Choose your dates and send a booking request in a minute.</p>
+        <ul class="hero__facts" aria-label="Highlights">
+          <li><strong>24h</strong><span>Front desk</span></li>
+          <li><strong>417</strong><span>Rooms</span></li>
+          <li><strong>Free</strong><span>Wi-Fi</span></li>
+        </ul>
+      </div>
+      <form class="card avail" id="availForm" novalidate>
+        <h2 class="avail__title">Check availability</h2>
+        <p class="avail__sub">No payment now. Our team confirms by phone.</p>
+        <div class="avail__grid">
+          <div class="field"><label class="field__label" for="a-in">Check-in</label><input class="input" id="a-in" type="date" required></div>
+          <div class="field"><label class="field__label" for="a-out">Check-out</label><input class="input" id="a-out" type="date" required></div>
+          <div class="field"><label class="field__label" for="a-ad">Adults</label><input class="input" id="a-ad" type="number" min="1" max="6" value="2"></div>
+          <div class="field"><label class="field__label" for="a-ch">Children</label><input class="input" id="a-ch" type="number" min="0" max="4" value="0"></div>
+          <div class="field avail__wide"><label class="field__label" for="a-type">Room type</label>
+            <select class="select" id="a-type"><option value="STD">Standard</option><option value="DLX">Deluxe</option><option value="FAM">Family</option><option value="STE">Suite</option></select></div>
+          <div class="field avail__wide"><label class="field__label" for="a-name">Your name</label><input class="input" id="a-name" type="text" placeholder="Full name"></div>
+          <div class="field avail__wide"><label class="field__label" for="a-ph">Phone</label><input class="input" id="a-ph" type="tel" placeholder="+880 1XXX-XXXXXX"></div>
+        </div>
+        <p class="avail__msg" id="availMsg" role="status" aria-live="polite"></p>
+        <button class="btn btn--primary avail__submit" type="submit">Request booking</button>
+      </form>
+    </section>
+
+    <section class="section" id="rooms">
+      <div class="section__head">
+        <h2 class="section__title">Our rooms</h2>
+        <p class="section__lead">Prices are per night, before 15% tax.</p>
+      </div>
+      <div class="rooms">
+        <article class="card room"><div class="room__img" aria-hidden="true">Photo</div><div class="room__body"><h3>Standard</h3><p>Queen bed, work desk, air conditioning, Wi-Fi.</p><p class="room__price">BDT 6,000 <span>/ night</span></p></div></article>
+        <article class="card room"><div class="room__img" aria-hidden="true">Photo</div><div class="room__body"><h3>Deluxe</h3><p>Larger room, city view, seating area, minibar.</p><p class="room__price">BDT 8,500 <span>/ night</span></p></div></article>
+        <article class="card room"><div class="room__img" aria-hidden="true">Photo</div><div class="room__body"><h3>Family</h3><p>Two beds, space for up to five guests.</p><p class="room__price">BDT 11,000 <span>/ night</span></p></div></article>
+        <article class="card room"><div class="room__img" aria-hidden="true">Photo</div><div class="room__body"><h3>Suite</h3><p>Separate living room, king bed, premium amenities.</p><p class="room__price">BDT 15,000 <span>/ night</span></p></div></article>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="facilities">
+      <div class="section__head"><h2 class="section__title">Facilities</h2><p class="section__lead">Everything you need, nothing you do not.</p></div>
+      <ul class="facts">
+        <li class="card"><strong>24-hour front desk</strong><span>Check-in and help any time of day.</span></li>
+        <li class="card"><strong>Daily housekeeping</strong><span>Rooms cleaned and refreshed every day.</span></li>
+        <li class="card"><strong>Room requests</strong><span>Towels, water and supplies brought to your door.</span></li>
+        <li class="card"><strong>Free Wi-Fi</strong><span>Fast internet in every room and the lobby.</span></li>
+        <li class="card"><strong>Lifts on every floor</strong><span>Easy access across all 12 floors.</span></li>
+        <li class="card"><strong>Secure stay</strong><span>CCTV and key-card access.</span></li>
+      </ul>
+    </section>
+
+    <section class="section" id="location">
+      <div class="section__head"><h2 class="section__title">Location and getting here</h2><p class="section__lead">Sample directions for the preview. The real details go here.</p></div>
+      <div class="where">
+        <div class="where__map" aria-hidden="true">Map</div>
+        <ul class="where__list">
+          <li><strong>Address</strong><span>[Hotel address], Dhaka</span></li>
+          <li><strong>From the airport</strong><span>About [XX] minutes by car. Taxi and ride-hailing available.</span></li>
+          <li><strong>From the railway station</strong><span>About [XX] minutes by car.</span></li>
+          <li><strong>Parking</strong><span>[Parking details to be confirmed].</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="faq">
+      <div class="section__head"><h2 class="section__title">Good to know</h2></div>
+      <div class="faq">
+        <details class="faq__item"><summary>What are the check-in and check-out times?</summary><p>Check-in from [14:00], check-out by [12:00]. Ask the front desk about early arrival or late departure.</p></details>
+        <details class="faq__item"><summary>What is the cancellation policy?</summary><p>[Policy to be confirmed]. Please call the front desk to change or cancel a request.</p></details>
+        <details class="faq__item"><summary>Is parking available?</summary><p>[Parking details to be confirmed]. Ask the front desk when you book.</p></details>
+        <details class="faq__item"><summary>Do I need to show ID?</summary><p>Yes. Every adult guest shows a valid photo ID or passport at check-in.</p></details>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section__head"><h2 class="section__title">Contact</h2></div>
+      <div class="contact">
+        <p><strong>Address</strong><span>[Hotel address], Dhaka</span></p>
+        <p><strong>Phone</strong><span>+880 1XXX-XXXXXX</span></p>
+        <p><strong>Email</strong><span>reservations@example.com</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>&copy; [Hotel Name]. Sample preview.</span>
+    <a href="login.html">Staff Login</a>
+  </footer>
+  <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Room Booking - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="room-booking.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="room-booking">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link sidebar__link--active" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link" href="rooms.html">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <div class="page-head">
+          <h1 class="page-title">Room Booking</h1>
+          <p class="page-lede">A quick walk-in booking in three steps. The summary on the right updates as you go.</p>
+        </div>
+        <div class="rb-layout">
+          <div class="rb-steps">
+            <section class="card step" aria-labelledby="s1">
+              <header class="step__head">
+                <span class="step__num" aria-hidden="true">1</span>
+                <div><h2 class="step__title" id="s1"><span class="sr-only">Step 1: </span>Dates and Guests</h2><p class="step__hint">When is the guest staying, and how many are coming?</p></div>
+              </header>
+              <div class="rb-fields">
+                <label class="rb-field">Check-in<input class="input" type="date" id="rbIn"></label>
+                <label class="rb-field">Check-out<input class="input" type="date" id="rbOut"></label>
+                <label class="rb-field">Adults<input class="input" type="number" min="1" max="6" id="rbAdults" value="2"></label>
+                <label class="rb-field">Children<input class="input" type="number" min="0" max="6" id="rbKids" value="0"></label>
+              </div>
+              <p class="field-error" id="rbDateErr" role="alert" hidden></p>
+            </section>
+
+            <section class="card step" aria-labelledby="s2">
+              <header class="step__head">
+                <span class="step__num" aria-hidden="true">2</span>
+                <div><h2 class="step__title" id="s2"><span class="sr-only">Step 2: </span>Room Type</h2><p class="step__hint">Availability is checked for the dates above.</p></div>
+              </header>
+              <div class="rb-types" id="rbTypes" role="radiogroup" aria-label="Room type"></div>
+              <label class="rb-field rb-roompick">Room<select class="select" id="rbRoom"></select></label>
+            </section>
+
+            <section class="card step" aria-labelledby="s-guest">
+              <header class="step__head">
+                <span class="step__num" aria-hidden="true">3</span>
+                <div><h2 class="step__title" id="s-guest"><span class="sr-only">Step 3: </span>Guest Details</h2><p class="step__hint">Then take payment in the summary and confirm.</p></div>
+              </header>
+              <div class="rb-guest">
+                <label class="rb-field">Guest name<input class="input" id="rbName" type="text" placeholder="Full name" autocomplete="off"></label>
+                <label class="rb-field">Phone<input class="input" id="rbPhone" type="tel" placeholder="+880 1XXX-XXXXXX" autocomplete="off"></label>
+                <div class="rb-idrow">
+                  <label class="rb-field">ID type<select class="select" id="rbIdType"><option>NID</option><option>Passport</option><option>Driving License</option></select></label>
+                  <label class="rb-field">ID number<input class="input" id="rbIdNo" type="text" autocomplete="off"></label>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <aside class="card rb-summary" aria-labelledby="s3">
+            <h2 class="rb-summary__title" id="s3">Booking Summary</h2>
+            <dl class="rb-lines" id="rbLines"></dl>
+            <label class="rb-field">Discount (BDT)<input class="input" id="rbDisc" type="number" min="0" value="0"></label>
+            <p class="rb-note" id="rbDiscNote"></p>
+            <p class="rb-total"><span>Total</span><strong id="rbTotal">BDT 0</strong></p>
+            <label class="rb-field">Amount received now (BDT)<input class="input" id="rbPaid" type="number" min="0" value="0"></label>
+            <fieldset class="rb-pay">
+              <legend>Payment method</legend>
+              <label class="pay"><input class="pay__input" type="radio" name="pay" value="Cash" checked><span class="pay__btn">Cash</span></label>
+              <label class="pay"><input class="pay__input" type="radio" name="pay" value="Card"><span class="pay__btn">Card</span></label>
+              <label class="pay"><input class="pay__input" type="radio" name="pay" value="Mobile Banking"><span class="pay__btn">Mobile Banking</span></label>
+            </fieldset>
+            <label class="rb-check" id="rbCheckWrap"><input type="checkbox" id="rbCheckin" checked> Check the guest in now</label>
+            <p class="field-error" id="rbErr" role="alert" hidden></p>
+            <button class="btn btn--primary rb-confirm" id="rbConfirm" type="button">Confirm Booking</button>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/room-booking.js"></script>
+</body>
+</html>

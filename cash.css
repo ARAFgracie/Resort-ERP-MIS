@@ -1,0 +1,65 @@
+/* cash.css - Claude B, round 2. Loads after base.css. */
+.page-head { display: grid; gap: 4px; }
+.page-title { font-size: 2rem; }
+.page-sub { margin: 0; color: var(--text-muted); }
+
+.cash-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.cash-stats .card { padding: 16px; display: grid; gap: 4px; align-content: start; }
+.cash-stats .card:first-child { border-top: 3px solid var(--accent); }
+.stat__label { margin: 0; color: var(--text-muted); font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.cash-stats .stat__value { margin: 4px 0 0; font-size: 1.0625rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; line-height: 1.2; }
+.stat__value--warn { color: var(--warning); }
+.stat__note { margin: 0; color: var(--text-muted); font-size: .8125rem; }
+@media (min-width: 700px) { .cash-stats .card { padding: 20px; } .cash-stats .stat__value { font-size: 1.375rem; } }
+@media (min-width: 1100px) { .cash-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.cash-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+.cash-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (min-width: 800px) { .cash-side { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1700px) { .cash-layout { grid-template-columns: minmax(0, 1fr) 380px; } .cash-side { grid-template-columns: minmax(0, 1fr); } }
+.card__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.card__head .card__title { margin: 0; }
+.card__title { font-size: 1.0625rem; }
+.cash-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.cash-filters .input { flex: 1 1 240px; width: auto; min-width: 0; }
+.table-actions { flex-wrap: nowrap; }
+.cash-filters .select { width: auto; flex: 0 1 140px; }
+
+.table th { font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.table td { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.table tbody tr { transition: background .15s; }
+.table tbody tr:hover { background: var(--surface-2); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table-wrap--scroll { max-height: 520px; }
+td.right, th.right { text-align: right; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+.cash-side .field__label { margin-top: 16px; }
+.cash-side form .field__label:first-child { margin-top: 0; }
+.input, .select { transition: border-color .15s, box-shadow .15s; }
+.input:focus, .select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--surface-2), 0 0 0 4px var(--accent); }
+.cash-hint { margin: 6px 0 0; min-height: 1.2em; font-size: .8125rem; color: var(--text-muted); }
+.cash-submit { width: 100%; min-height: 48px; margin-top: 20px; }
+
+.dc { display: grid; grid-template-columns: 1fr auto; gap: 0 16px; margin: 0 0 20px; }
+.dc dt, .dc dd { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.dc dt { color: var(--text-muted); }
+.dc dd { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.appr { display: grid; gap: 12px; }
+.appr__item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.appr__meta { color: var(--text-muted); font-size: .8125rem; }
+
+@media (max-width: 480px) { .page-title { font-size: 1.625rem; } .card { padding: 16px; } .cash-filters .select { flex: 1 1 100%; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Small-screen shell fix (also listed as a base.css request): keep the page from scrolling sideways and the topbar on one line. */
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .sidebar, .main { min-width: 0; }
+  .topbar { gap: 8px; padding: 0 12px; }
+  .topbar .btn { padding: 6px 10px; white-space: nowrap; }
+  .topbar .theme-label, .topbar .menu__btn > span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+.main { grid-template-columns: minmax(0, 1fr); }

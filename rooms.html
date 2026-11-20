@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rooms - Hotel ERP</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="rooms.css">
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="rooms">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">Hotel ERP</div>
+      <nav>
+        <ul class="sidebar__nav">
+          <li><a class="sidebar__link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="front-desk.html">Front Desk</a></li>
+          <li><a class="sidebar__link" href="room-booking.html">Room Booking</a></li>
+          <li><a class="sidebar__link sidebar__link--active" href="rooms.html" aria-current="page">Rooms</a></li>
+          <li><a class="sidebar__link" href="guest-services.html">Guest Services</a></li>
+          <li><a class="sidebar__link" href="housekeeping.html">Housekeeping</a></li>
+          <li><a class="sidebar__link" href="staff.html">Staff Information</a></li>
+          <li><a class="sidebar__link" href="cash.html">Cash Receiving</a></li>
+          <li><a class="sidebar__link" href="analytics.html">Analytics</a></li>
+          <li><a class="sidebar__link" href="search.html">Search</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <input class="input topbar__search" type="search" placeholder="Search guests, rooms, bookings">
+        <span class="topbar__spacer"></span>
+        <!-- JS: theme toggle switches data-theme on html -->
+        <button class="btn" type="button">Theme</button>
+        <!-- JS: notifications dropdown -->
+        <button class="btn" type="button">Alerts</button>
+        <!-- JS: user menu with role and logout -->
+        <button class="btn" type="button">Account</button>
+      </header>
+      <main class="main">
+        <div class="page-head">
+          <h1 class="page-title">Rooms</h1>
+          <p class="page-lede">Every room in the hotel at a glance. Choose a tile to see the guest, the stay and what you can do next.</p>
+        </div>
+
+        <section class="card overview" aria-label="Floor selector and legend">
+          <div class="overview__col">
+            <h2 class="overview__label">Jump to floor</h2>
+            <!-- JS: scroll to floor and expand its section -->
+            <nav class="floor-nav" aria-label="Floor selector"><a class="floor-nav__link" href="#floor-0">G</a><a class="floor-nav__link" href="#floor-1">1</a><a class="floor-nav__link" href="#floor-2">2</a><a class="floor-nav__link" href="#floor-3">3</a><a class="floor-nav__link" href="#floor-4">4</a><a class="floor-nav__link" href="#floor-5">5</a><a class="floor-nav__link" href="#floor-6">6</a><a class="floor-nav__link" href="#floor-7">7</a><a class="floor-nav__link" href="#floor-8">8</a><a class="floor-nav__link" href="#floor-9">9</a><a class="floor-nav__link" href="#floor-10">10</a><a class="floor-nav__link" href="#floor-11">11</a></nav>
+          </div>
+          <div class="overview__col">
+            <h2 class="overview__label legend__title" id="legendTitle">Status legend (417 rooms)</h2>
+            <ul class="legend" id="roomLegend"></ul>
+          </div>
+        </section>
+
+        <div class="rooms-layout">
+          <section class="rooms-board" aria-label="Room grid">
+            <div class="room-find"><label class="field__label" for="roomFind">Find a room</label><input class="input" id="roomFind" type="search" placeholder="Room number, for example 804, then press Enter" autocomplete="off"></div>
+            <input class="filter__radio" type="radio" name="room-filter" id="flt-all" checked>
+            <input class="filter__radio" type="radio" name="room-filter" id="flt-vacant">
+            <input class="filter__radio" type="radio" name="room-filter" id="flt-occupied">
+            <input class="filter__radio" type="radio" name="room-filter" id="flt-dirty">
+            <input class="filter__radio" type="radio" name="room-filter" id="flt-maintenance">
+            <input class="filter__radio" type="radio" name="room-filter" id="flt-reserved">
+            <!-- JS: filter room tiles by chip (CSS fallback uses the radio inputs) -->
+            <div class="chips" role="group" aria-label="Filter rooms by status"><label class="chip" for="flt-all">All</label><label class="chip" for="flt-vacant">Vacant</label><label class="chip" for="flt-occupied">Occupied</label><label class="chip" for="flt-dirty">Dirty</label><label class="chip" for="flt-maintenance">Maintenance</label><label class="chip" for="flt-reserved">Reserved</label></div>
+            <div class="floors" id="floors"></div>
+          </section>
+
+          <!-- JS: open room side panel when a room tile is clicked -->
+          <aside class="card room-panel" id="roomPanel" aria-label="Room details"></aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/seed-rooms.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pages/rooms.js"></script>
+</body>
+</html>

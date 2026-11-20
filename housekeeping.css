@@ -1,0 +1,63 @@
+/* Shared polish (Claude D, round 2). Colors come only from base.css variables. */
+.page-head { display: grid; gap: 4px; }
+.page-title { font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.2; }
+.page-sub { margin: 0; max-width: 60ch; color: var(--text-muted); }
+.card__title { margin: 0 0 16px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.input, .select, .textarea { transition: border-color 0.15s, box-shadow 0.15s; }
+.input::placeholder, .textarea::placeholder { color: var(--text-muted); }
+.input:focus-visible, .select:focus-visible, .textarea:focus-visible { border-color: var(--accent); outline-offset: 0; }
+.textarea { resize: vertical; line-height: 1.5; }
+.badge { padding: 3px 10px; letter-spacing: 0.01em; white-space: nowrap; }
+.table { font-variant-numeric: tabular-nums; }
+.table th { padding: 10px 12px; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.table td { padding: 14px 12px; vertical-align: middle; }
+.table tbody tr:last-child td { border-bottom: 0; }
+.empty-row { padding: 40px 24px; }
+.modal__backdrop { background: color-mix(in srgb, var(--text) 55%, transparent); }
+.modal__box { border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+.modal__actions .btn { min-width: 96px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+.field__label { display: block; margin: 0 0 4px; }
+.assign__row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 16px; align-items: end; }
+.assign__btn { white-space: nowrap; min-width: 160px; }
+
+.board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.board__col {
+  display: grid; gap: 12px; align-content: start; padding: 16px 12px 12px;
+  background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--border);
+  border-radius: var(--radius-lg); max-height: 72vh; overflow-y: auto;
+}
+.board__col--dirty { border-top-color: var(--warning); }
+.board__col--progress { border-top-color: var(--accent); }
+.board__col--vacant { border-top-color: var(--success); }
+.board__col--maintenance { border-top-color: var(--danger); }
+.board__title {
+  margin: 0 0 4px; padding: 0 4px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted);
+}
+.board__title .badge { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.board__col > .muted { margin: 0; padding: 24px 8px; text-align: center; border: 1px dashed var(--border); border-radius: var(--radius); }
+
+.room-card {
+  display: grid; gap: 10px; padding: 14px 16px; background: var(--surface);
+  border: 1px solid var(--border); border-left: 3px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+}
+.room-card--dirty { border-left-color: var(--warning); }
+.room-card--progress { border-left-color: var(--accent); }
+.room-card--vacant { border-left-color: var(--success); }
+.room-card--maintenance { border-left-color: var(--danger); }
+.room-card__head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.room-card__num { font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.room-card__floor { font-size: 0.8125rem; color: var(--text-muted); }
+.room-card__note { margin: 0; font-size: 0.875rem; color: var(--text-muted); }
+.room-card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.room-card .btn--small { width: 100%; min-height: 44px; padding: 8px 12px; }
+
+@media (max-width: 1280px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .assign__row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .assign__btn { grid-column: 1 / -1; } }
+@media (max-width: 640px) {
+  .board { grid-template-columns: minmax(0, 1fr); }
+  .board__col { max-height: none; overflow: visible; }
+  .assign__row { grid-template-columns: minmax(0, 1fr); }
+}
